@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_report_list_product_price"
+                string="Print List Product Price"
+                model="product.pricelist"
+                report_type="qweb-pdf"
+                file="pricelist_report_print.report_pricelist"
+                name="pricelist_report_print.report_pricelist"
+                print_report_name="'Pricelist - %s' % (object.name)"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="pricelist_report_print.report_pricelist">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <t t-set="lst_product" t-value="doc.env['product.product'].search([])"/>
+                        <t t-set="lst_product_length" t-value="len(lst_product)"/>
+                        <t t-set="lst_price"
+                           t-value="doc.get_products_price(lst_product,[1]*lst_product_length,[False]*lst_product_length)"/>
+                        <div class="text-center">
+                            <h1 t-esc="doc.name"/>
+                        </div>
+                        <table class="table table-sm" style="width:100%">
+                            <thead style="font-size:28px;">
+                                <tr>
+                                    <th class="text-center">
+                                        Product Name
+                                    </th>
+                                    <th class="text-center">
+                                        Product Price
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="lst_price.items()" t-as="item">
+                                    <t t-set="product" t-value="lst_product.browse(item[0]).name"/>
+                                    <tr>
+                                        <td class='text-center'>
+                                            <t t-esc="product"/>
+                                        </td>
+                                        <td class='text-center'>
+                                            <t t-esc="round(item[1],2)"/>
+                                            <t t-esc="doc.currency_id.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
